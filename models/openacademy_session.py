@@ -20,13 +20,18 @@ class Session(models.Model):
         comodel_name='res.partner',
         string='Instructor',
     )
-    
     course_id = fields.Many2one(
         comodel_name='openacademy.course',
         ondelete='cascade',
         string='Course',
         required=True,
     )
+    attendee_ids = fields.Many2many(
+        comodel_name='res.partner', 
+        string="Attendees",
+    )
+
+
 
     #_id Many2one 
-    #_ids One2many ó Many2many
+    #_ids One2many o Many2many

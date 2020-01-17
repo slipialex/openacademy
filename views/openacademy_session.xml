@@ -18,6 +18,10 @@
                             <field name="seats"/>
                         </group>
                     </group>
+                    <group string="Attendee">
+                        <label for="attendee_ids"/>
+                        <field name="attendee_ids"/>    
+                    </group>
                 </sheet>
             </form>
         </field>
