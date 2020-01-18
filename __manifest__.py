@@ -7,8 +7,8 @@
     ],
     'data':[
         'views/openacademy_course.xml',
-        'views/openacademy_session.xml'
+        'views/openacademy_session.xml',
+        'views/openacademy_partner.xml',
     ],
     'aplication':True,
-    
 }
