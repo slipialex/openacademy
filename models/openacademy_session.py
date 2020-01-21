@@ -8,6 +8,7 @@ class Session(models.Model):
         required=True,
     )
     start_date = fields.Date(
+        default=fields.Date.today,
     )
     duration = fields.Float(
         digits=(6, 2),
@@ -16,6 +17,12 @@ class Session(models.Model):
     seats = fields.Integer(
         string='Number of seats',
     )
+    active = fields.Boolean(
+        default=True,
+        )
+
+
+
     instructor_id = fields.Many2one(
         comodel_name='res.partner',
         string='Instructor',
