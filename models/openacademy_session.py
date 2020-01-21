@@ -19,6 +19,12 @@ class Session(models.Model):
     instructor_id = fields.Many2one(
         comodel_name='res.partner',
         string='Instructor',
+        domain=[
+                '|', 
+                ('instructor', '=', True),
+                ('category_id.name', 'ilike', "Teacher"),
+            ]
+
     )
     course_id = fields.Many2one(
         comodel_name='openacademy.course',
