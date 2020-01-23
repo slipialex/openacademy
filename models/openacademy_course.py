@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 class OpenacademyCourse(models.Model):
     _name = 'openacademy.course'
