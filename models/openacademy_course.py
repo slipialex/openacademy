@@ -1,5 +1,5 @@
 from odoo import models, fields, api, exceptions
-
+from datetime import timedelta
 class OpenacademyCourse(models.Model):
     _name = 'openacademy.course'
     _description = 'Nombre no tecnico del model: Openacademy Course'
