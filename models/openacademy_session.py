@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from datetime import timedelta
 
 class Session(models.Model):
@@ -19,10 +19,8 @@ class Session(models.Model):
         string='Number of seats',
     )
     active = fields.Boolean(
-        default=True,
-        )
-
-
+        default=True
+    )
 
     instructor_id = fields.Many2one(
         comodel_name='res.partner',
@@ -32,7 +30,6 @@ class Session(models.Model):
                 ('instructor', '=', True),
                 ('category_id.name', 'ilike', "Teacher"),
             ]
-
     )
     course_id = fields.Many2one(
         comodel_name='openacademy.course',
@@ -52,12 +49,24 @@ class Session(models.Model):
     end_date = fields.Date(
         string="End Date", 
         store=True,
-        compute='_get_end_date', 
-        inverse='_set_end_date',
+        compute='_get_end_date',
+        inverse='_set_end_date'
     )
 
+    hours = fields.Float(
+        string="Duration in hours",
+        compute='_get_hours',
+        inverse='_set_hours'
+    )
+
+    attendees_count = fields.Integer(
+        string="Attendees count", 
+        compute='_get_attendees_count', 
+        store=True
+    )
+
+
     @api.depends('seats', 'attendee_ids')
-    
     def _taken_seats(self):
         for r in self:
             if not r.seats:
@@ -66,7 +75,6 @@ class Session(models.Model):
                 r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
 
     @api.onchange('seats', 'attendee_ids')
-    
     def _verify_valid_seats(self):
         if self.seats < 0:
             return {
@@ -104,6 +112,20 @@ class Session(models.Model):
             # so add one day to get 5 days instead
             r.duration = (r.end_date - r.start_date).days + 1
 
+    @api.depends('duration')
+    def _get_hours(self):
+        for r in self:
+            r.hours = r.duration * 24
+
+    def _set_hours(self):
+        for r in self:
+            r.duration = r.hours / 24
+
+
+    @api.depends('attendee_ids')
+    def _get_attendees_count(self):
+        for r in self:
+            r.attendees_count = len(r.attendee_ids)
 
 
     @api.constrains('instructor_id', 'attendee_ids')
