@@ -22,6 +22,10 @@ class Session(models.Model):
         default=True
     )
 
+    color = fields.Integer(
+        
+    )
+
     instructor_id = fields.Many2one(
         comodel_name='res.partner',
         string='Instructor',
