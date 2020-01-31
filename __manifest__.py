@@ -6,6 +6,8 @@
     'depends':[
     ],
     'data':[
+        'security/openacademy_security.xml',
+        'security/ir.model.access.csv',
         'views/openacademy_course.xml',
         'views/openacademy_session.xml',
         'views/openacademy_partner.xml',
