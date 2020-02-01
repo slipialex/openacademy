@@ -12,6 +12,7 @@
         'views/openacademy_session.xml',
         'views/openacademy_partner.xml',
         'views/openacademy_wizard.xml',
+        'reports/openacademy_session.xml',
     ],
     'aplication':True,
 }
