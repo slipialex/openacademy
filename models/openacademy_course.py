@@ -1,4 +1,4 @@
-from odoo import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 from datetime import timedelta
 class OpenacademyCourse(models.Model):
     _name = 'openacademy.course'
@@ -8,8 +8,10 @@ class OpenacademyCourse(models.Model):
         required=True,
         string='Title',
     )
+
     description = fields.Text(
     )
+
     responsible_id = fields.Many2one(
         comodel_name='res.users',
         ondelete='set null',

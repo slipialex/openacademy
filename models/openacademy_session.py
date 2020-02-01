@@ -1,4 +1,4 @@
-from odoo import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 from datetime import timedelta
 
 class Session(models.Model):
@@ -91,7 +91,7 @@ class Session(models.Model):
             return {
                 'warning': {
                     'title': "Too many attendees",
-                    'message': "Increase seats or remove excess attendees",
+                    'message': _("Increase seats or remove excess attendees"),
                 },
             }
 
